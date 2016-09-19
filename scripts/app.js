@@ -1,19 +1,22 @@
 
-angular.module('bookApp', []).config(config);
+angular.module('bookApp', ['ngRoute']).config(config);
 
 config.$inject = ['$routeProvider', '$locationProvider'];
 
 function config( $routeProvider, $locationProvider ){
   $routeProvider
     .when('/', {
-      templateUrl: 'templates/books',
+      templateUrl: '/templates/books.html',
       controllerAs: 'booksIndexCtrl',
-      controller: 'BooksIndexControl'
+      controller: 'BooksIndexController'
     })
-    .when(':/id', {
-      templateUrl: 'templates/books',
+    .when('/:id', {
+      templateUrl: '/templates/books-show.html',
       controllerAs: 'booksShowCtrl',
-      controller: 'BooksShowControl'
+      controller: 'BooksShowController'
+    })
+    .otherwise({
+      redirectTo: '/'
     });
 
     $locationProvider.html5Mode({
